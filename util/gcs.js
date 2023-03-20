@@ -22,7 +22,7 @@ const uploadFile = (file, path) => new Promise((resolve, reject) => {
      * and it would cause troubles later!)
      */
 
-    const filePath = path == null ? `${uuidv4()}_${originalname}` :  `${path}/${uuidv4()}_${originalname}`
+    const filePath = path == null ? `${uuidv4()}_${originalname}` :  `${path}/${originalname}`
     const blob = bucket.file(filePath.replace(/ /g, "_"));
     const blobStream = blob.createWriteStream({
         resumable: false
@@ -38,8 +38,11 @@ const uploadFile = (file, path) => new Promise((resolve, reject) => {
         );
         resolve(publicUrl);
     })
-    .on('error', () => {
-        reject(`Unable to upload file, something went wrong.`)
+    .on('error', (error) => {
+        reject({
+            message: 'Unable to upload file, something went wrong.',
+            gcs: error.message
+        })
     })
     .end(buffer);
 });

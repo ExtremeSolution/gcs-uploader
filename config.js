@@ -8,10 +8,17 @@ const projectId = process.env.PROJECT_ID;
 
 const { Storage } = GCS;
 
-const storage = new Storage({
-    keyFilename,
-    projectId,
-});
+let storage;
+if(process.env.NODE_ENV === 'production'){ 
+    storage = new Storage({
+        projectId
+    });
+} else {
+    storage = new Storage({
+        keyFilename,
+        projectId,
+    });
+}
 
 const bucket = storage.bucket(bucketName);
 

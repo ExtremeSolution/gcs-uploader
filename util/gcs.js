@@ -38,8 +38,11 @@ const uploadFile = (file, path) => new Promise((resolve, reject) => {
         );
         resolve(publicUrl);
     })
-    .on('error', () => {
-        reject(`Unable to upload file, something went wrong.`)
+    .on('error', (error) => {
+        reject({
+            message: 'Unable to upload file, something went wrong.',
+            gcs: error.message
+        })
     })
     .end(buffer);
 });

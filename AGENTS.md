@@ -20,3 +20,7 @@
 - **File Upload Limitations:** The app uses `multer.memoryStorage()`. The maximum file size is strictly enforced by the `FILE_LIMIT` environment variable (defaults to 5MB). Avoid changing to disk storage unless requested.
 - **File Naming Mutilation:** Uploaded filenames automatically have spaces replaced by underscores. If no `path` is provided in the upload body, a UUIDv4 is prepended to the filename.
 - **Testing:** There is currently no test suite configured (`npm test` will fail). Rely on manual endpoint testing for verification.
+
+## Git Workflow Constraints
+- **NEVER** run `git commit`, `git push`, or alter the git history in any way unless the user explicitly commands it.
+- Present file modifications and wait for the user to manage their own git state.

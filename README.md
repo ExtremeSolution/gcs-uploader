@@ -19,13 +19,13 @@ Add service account JSON key for GCS to root folder using filename `key.json`
 ### 3. Install Dependencies
 
 ```bash
-    npm install
+    pnpm install
 ```
 
 ### 4. Run Application
 
 ```bash
-    npm start
+    pnpm start
 ```
 
 ## Docker Container

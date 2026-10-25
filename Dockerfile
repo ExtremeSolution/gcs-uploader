@@ -1,19 +1,17 @@
-# Use the official lightweight Node.js 12 image.
-# https://hub.docker.com/_/node
-FROM node:12-slim
+# Use the official lightweight Node.js 22 image.
+FROM node:22.23.4-slim
+
+# Enable corepack for pnpm
+RUN corepack enable
 
 # Create and change to the app directory.
 WORKDIR /usr/src/app
 
 # Copy application dependency manifests to the container image.
-# A wildcard is used to ensure copying both package.json AND package-lock.json (when available).
-# Copying this first prevents re-running npm install on every code change.
-COPY package*.json ./
+COPY package.json pnpm-lock.yaml ./
 
 # Install production dependencies.
-# If you add a package-lock.json, speed your build by switching to 'npm ci'.
-# RUN npm ci --only=production
-RUN npm ci --only=production
+RUN pnpm install --frozen-lockfile --prod
 
 # Copy local code to the container image.
 COPY . ./

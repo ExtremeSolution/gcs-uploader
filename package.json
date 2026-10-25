@@ -1,6 +1,10 @@
 {
   "name": "es-gcs-uploader",
   "version": "1.0.0",
+  "engines": {
+    "node": ">=22.23.4"
+  },
+  "packageManager": "pnpm@9.1.0",
   "description": "Application to upload files to GCS",
   "main": "index.js",
   "author": "Hisham Sadek",
